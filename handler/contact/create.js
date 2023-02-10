@@ -17,6 +17,7 @@ module.exports = (req, res, name, email, mobile) => {
     const isMobilePhoneValid = Validator.isMobilePhone(mobile, 'id-ID')
     if (mobile) {
         if (!isMobilePhoneValid) { // jika validasi nombor handphone false
+            // menambah pesan jika terjadi salah format telpon
             message.push({
                 status: 'error',
                 message: 'Format nomor telpon salah(contoh: 08212345678)'
@@ -29,6 +30,7 @@ module.exports = (req, res, name, email, mobile) => {
     if (email) {
         const isEmailValid = Validator.isEmail(email);
         if (!isEmailValid) { // kondisi jika validasi false
+            // menambah pesan jika format email salah
             message.push({
                 status: 'error',
                 message: 'Format email salah (contoh: example@domain.com)'
@@ -57,6 +59,7 @@ module.exports = (req, res, name, email, mobile) => {
             mobile: mobile
         })
         fs.writeFileSync('./data/contacts.json', JSON.stringify(user));
+        // menambah pesan jika data berhasil ditambahkan
         message.push({
             status: 'success',
             message: 'Data berhasil ditambahkan'
@@ -69,6 +72,7 @@ module.exports = (req, res, name, email, mobile) => {
 
     // kemudian data tersebut ke contacts.json
     fs.writeFileSync('./data/contacts.json', JSON.stringify(user));
+    // menambah pesan jika data berhasil ditambahkan
     message.push({
         status: 'success',
         message: 'Data berhasil ditambahkan'
